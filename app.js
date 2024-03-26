@@ -5,16 +5,18 @@ var {ruruHTML} = require('ruru/server')
 
 const schema = buildSchema(
     ` type Query {
-        hello: String
+        hello(name: String!): String
         age: Int
         year: Int
-        ysd : Float
+        ysd : Float!
+        present: Boolean
+        Hobbies: [String!]!
     }   
 `)
 
 const rootValue = {
-    hello:() => {
-        return "Hello world"
+    hello:({name}) => {
+        return "Hello " + name
     },
     age:() => {
         return 25;
@@ -22,8 +24,10 @@ const rootValue = {
     year:() => {
         return 1997;
     },
-    ysd:() => {
-        return 19.97;
+    ysd: 19.97,
+    present:true,
+    Hobbies:() => {
+        return ["eating", "swimming"]
     },
 }
 
