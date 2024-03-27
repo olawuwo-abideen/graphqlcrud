@@ -1,37 +1,22 @@
-import { createSchema, createYoga } from 'graphql-yoga'
-
+import { createSchema} from 'graphql-yoga'
+import {typeDef as User, resolvers as userResolvers} from './models/user.js'
+import _ from 'lodash';
  
 const queries = /* GraphQL */ `
         type Query {
           hello: String
         }
 `;
-const   userTypeDef  = /* GraphQL */`
-        type Query {
-          user: User
-        }
-        type User{
-            id: Int
-            name: String
-            age: Int
-        }
-        
-      `;
+
+
+const resolvers = {
+    Query: {
+        hello: () => 'Hello from Yoga!',
+    },
+}
 
 export const schema = createSchema({
-    typeDefs: [queries, userTypeDef],
-    resolvers: {
-        Query: {
-            hello: () => 'Hello from Yoga',
-            user: () => {
-                return {
-                    id: 1,
-                    name: 'wale',
-                    age: null
-                }
-              
-            }
-        }
-    }
+    typeDefs: [queries, User],
+    resolvers: _.merge(resolvers, userResolvers) 
 })
      
