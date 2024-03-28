@@ -3,11 +3,16 @@ export const typeDef  = /* GraphQL */`
           user: User
         }
         type Mutation {
-            createUser:User
+            createUser:(user:NewUserInput!): User
         }
         type User{
             id: Int
             name: String
+            age: Int
+        } 
+        input NewUserInputUser{
+            name: String!
+            age: int!
         } 
       `;
 
