@@ -26,8 +26,11 @@ export  const resolvers = {
  },
  },
  Mutation: {
-    createUser: (obj) => {
-        console.log("creating a user")
+    createUser: ({user}) => {
+       return {
+        id:1,
+        ...user
+       };
     }
  }, 
  
